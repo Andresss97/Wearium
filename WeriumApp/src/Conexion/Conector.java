@@ -2,30 +2,28 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Creacion;
-
+package Conexion;
 import java.sql.Connection;
 import java.sql.DriverManager;
-
 /**
  *
  * @author andre
  */
 public class Conector {
-    private Connection connect;
+    private Connection con;
     private String url;
     
     public Conector() {
-        this.connect = null;
-        this.url = "";
+        this.con = null;
+        this.url =  "";
     }
 
-    public Connection getConnect() {
-        return connect;
+    public Connection getCon() {
+        return con;
     }
 
-    public void setConnect(Connection connect) {
-        this.connect = connect;
+    public void setCon(Connection con) {
+        this.con = con;
     }
 
     public String getUrl() {
@@ -40,7 +38,7 @@ public class Conector {
         try {
             Class.forName("org.sqlite.JDBC");
             String bUrl = "jdbc:sqlite:" + ".//Database//DBproject.db";
-            this.connect = DriverManager.getConnection(bUrl);
+            this.con = DriverManager.getConnection(bUrl);
             this.url = ".//Database//DBproject.db";
         }
         catch(Exception ex) {
@@ -50,7 +48,7 @@ public class Conector {
     
     public void killConnection() {
         try {
-            this.connect.close();
+            this.con.close();
         }
         catch(Exception ex) {
             
