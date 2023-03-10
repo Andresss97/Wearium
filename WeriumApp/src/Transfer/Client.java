@@ -38,10 +38,6 @@ public class Client {
                 Object ob = ois.read(lenBytes,0,100);
                 String val = new String(lenBytes,0,100);
                 
-                if(val == null) {
-                    continue;
-                }
-                
                 return val;
             }
             catch(Exception ex) {
