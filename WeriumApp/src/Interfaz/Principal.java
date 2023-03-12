@@ -13,8 +13,10 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.accessibility.AccessibleContext;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JRootPane;
 
 /**
  *
@@ -53,9 +55,12 @@ public class Principal extends javax.swing.JFrame {
 
         container = new javax.swing.JPanel();
         central = new javax.swing.JPanel();
-        labelIP = new javax.swing.JLabel();
-        ip = new javax.swing.JTextField();
-        connectButton = new javax.swing.JButton();
+        labelUser = new javax.swing.JLabel();
+        username = new javax.swing.JTextField();
+        labelPassword = new javax.swing.JLabel();
+        jPasswordField1 = new javax.swing.JPasswordField();
+        buttonEnter = new javax.swing.JButton();
+        buttonRegister = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -65,13 +70,25 @@ public class Principal extends javax.swing.JFrame {
 
         central.setBackground(java.awt.Color.white);
 
-        labelIP.setForeground(java.awt.Color.black);
-        labelIP.setText("IP:");
+        labelUser.setBackground(java.awt.Color.white);
+        labelUser.setForeground(java.awt.Color.black);
+        labelUser.setText("Username:");
 
-        connectButton.setText("Connect ");
-        connectButton.addActionListener(new java.awt.event.ActionListener() {
+        labelPassword.setBackground(java.awt.Color.white);
+        labelPassword.setForeground(java.awt.Color.black);
+        labelPassword.setText("Password:");
+
+        buttonEnter.setText("Log in");
+        buttonEnter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                connectButtonActionPerformed(evt);
+                buttonEnterActionPerformed(evt);
+            }
+        });
+
+        buttonRegister.setText("Sign in");
+        buttonRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonRegisterActionPerformed(evt);
             }
         });
 
@@ -79,27 +96,40 @@ public class Principal extends javax.swing.JFrame {
         central.setLayout(centralLayout);
         centralLayout.setHorizontalGroup(
             centralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, centralLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(labelIP)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ip, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22))
             .addGroup(centralLayout.createSequentialGroup()
-                .addGap(194, 194, 194)
-                .addComponent(connectButton, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(204, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(buttonRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18))
+            .addGroup(centralLayout.createSequentialGroup()
+                .addGap(156, 156, 156)
+                .addGroup(centralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(buttonEnter, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(centralLayout.createSequentialGroup()
+                        .addGroup(centralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelPassword)
+                            .addComponent(labelUser))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(centralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPasswordField1)
+                            .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(165, Short.MAX_VALUE))
         );
         centralLayout.setVerticalGroup(
             centralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(centralLayout.createSequentialGroup()
-                .addGap(28, 28, 28)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, centralLayout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(buttonRegister)
+                .addGap(99, 99, 99)
                 .addGroup(centralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelIP)
-                    .addComponent(ip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(130, 130, 130)
-                .addComponent(connectButton)
-                .addContainerGap(186, Short.MAX_VALUE))
+                    .addComponent(labelUser)
+                    .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(centralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelPassword)
+                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(buttonEnter)
+                .addContainerGap(137, Short.MAX_VALUE))
         );
 
         container.add(central, java.awt.BorderLayout.CENTER);
@@ -109,31 +139,15 @@ public class Principal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void connectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_connectButtonActionPerformed
+    private void buttonRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRegisterActionPerformed
         // TODO add your handling code here:
-        String ip = this.ip.getText();
-        String welcomeMessage = "";
-        Socket socket;
-        try {
-            socket = new Socket(ip,6000);
-            Client client = new Client(socket);
-            this.client = client;
-            welcomeMessage = client.listenForMessage();
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(this, "Wrong Ip address", "IP from server info", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
         
-        JOptionPane.showMessageDialog(this, welcomeMessage, "Welcome", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_buttonRegisterActionPerformed
+
+    private void buttonEnterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEnterActionPerformed
+        // TODO add your handling code here:
         
-        this.container.removeAll();
-        this.container.repaint();
-        
-        JPanel panel = new ConfigPanel(this.client);
-        this.container.add(panel,BorderLayout.CENTER);
-        panel.setVisible(true);
-        pack();
-    }//GEN-LAST:event_connectButtonActionPerformed
+    }//GEN-LAST:event_buttonEnterActionPerformed
 
     /**
      * @param args the command line arguments
@@ -170,11 +184,22 @@ public class Principal extends javax.swing.JFrame {
         });
     }
 
+    public JPanel getContainer() {
+        return container;
+    }
+
+    public void setContainer(JPanel container) {
+        this.container = container;
+    }   
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttonEnter;
+    private javax.swing.JButton buttonRegister;
     private javax.swing.JPanel central;
-    private javax.swing.JButton connectButton;
     private javax.swing.JPanel container;
-    private javax.swing.JTextField ip;
-    private javax.swing.JLabel labelIP;
+    private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JLabel labelPassword;
+    private javax.swing.JLabel labelUser;
+    private javax.swing.JTextField username;
     // End of variables declaration//GEN-END:variables
 }
