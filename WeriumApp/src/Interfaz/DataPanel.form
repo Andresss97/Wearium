@@ -30,7 +30,7 @@
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Group type="103" alignment="0" groupAlignment="0" attributes="0">
                       <Component id="sendButton" alignment="1" min="-2" pref="80" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
@@ -54,7 +54,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="labelTrials" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="trials" min="-2" pref="161" max="-2" attributes="0"/>
+                      <Component id="trials" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="107" max="-2" attributes="0"/>
@@ -133,8 +133,6 @@
         <Property name="text" type="java.lang.String" value="Trials per condition:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="trials">
-    </Component>
     <Component class="javax.swing.JTextField" name="globes">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
@@ -182,6 +180,8 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sendButtonActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JSpinner" name="trials">
     </Component>
   </SubComponents>
 </Form>

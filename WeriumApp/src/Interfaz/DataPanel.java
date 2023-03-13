@@ -39,7 +39,6 @@ public class DataPanel extends javax.swing.JPanel {
         labelConnection = new javax.swing.JLabel();
         panelIm = new javax.swing.JPanel();
         labelTrials = new javax.swing.JLabel();
-        trials = new javax.swing.JTextField();
         globes = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -49,6 +48,7 @@ public class DataPanel extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         radius = new javax.swing.JTextField();
         sendButton = new javax.swing.JButton();
+        trials = new javax.swing.JSpinner();
 
         setBackground(java.awt.Color.white);
 
@@ -100,7 +100,7 @@ public class DataPanel extends javax.swing.JPanel {
                 .addGap(27, 318, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(sendButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createSequentialGroup()
@@ -119,7 +119,7 @@ public class DataPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(labelTrials)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(trials, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(trials)))
                 .addGap(107, 107, 107))
         );
         layout.setVerticalGroup(
@@ -160,7 +160,9 @@ public class DataPanel extends javax.swing.JPanel {
         Measurement m = new Measurement();
         m.setCoeff_A(Float.parseFloat(this.coeffA.getText()));
         m.setCoeff_B(Float.parseFloat(this.coeffB.getText()));
-        m.setTrials(Integer.parseInt(this.trials.getText()));
+        int valueTrials = (int) this.trials.getValue();
+        m.setTrials(valueTrials);
+        System.out.println(valueTrials);
         m.setNumberBalls(Integer.parseInt(this.globes.getText()));
         m.setRadius(Float.parseFloat(this.radius.getText()));
 
@@ -188,6 +190,6 @@ public class DataPanel extends javax.swing.JPanel {
     private javax.swing.JPanel panelIm;
     private javax.swing.JTextField radius;
     private javax.swing.JButton sendButton;
-    private javax.swing.JTextField trials;
+    private javax.swing.JSpinner trials;
     // End of variables declaration//GEN-END:variables
 }
