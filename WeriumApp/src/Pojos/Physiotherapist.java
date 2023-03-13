@@ -54,6 +54,12 @@ public class Physiotherapist{
     public void setSurname(String surname) {
         this.surname = surname;
     }
-    
-    
+
+    public List<Patient> getPatients() {
+        return patients;
+    }
+
+    public void setPatients(List<Patient> patients) {
+        this.patients = patients;
+    }
 }
