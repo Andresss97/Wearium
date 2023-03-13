@@ -5,24 +5,26 @@
 package Interfaz;
 
 import Pojos.Measurement;
-import Transfer.Client;
+import java.awt.Color;
 import javax.swing.JOptionPane;
 
 /**
  *
- * @author andre
+ * @author Andrés de Pereda Cru
  */
-public class ConfigPanel extends javax.swing.JPanel {
+public class DataPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form ConfigPanel
+     * Creates new form ConnectPanel
      */
     
-    private Client client;
+
+    private Principal frame;
     
-    public ConfigPanel(Client client) {
+    public DataPanel(Principal frame) {
         initComponents();
-        this.client = client;
+        this.frame = frame;
+        this.panelIm.setBackground(Color.green);
     }
 
     /**
@@ -34,37 +36,41 @@ public class ConfigPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        labelConnection = new javax.swing.JLabel();
+        panelIm = new javax.swing.JPanel();
         labelTrials = new javax.swing.JLabel();
         trials = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
         globes = new javax.swing.JTextField();
-        sendButton = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         coeffA = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
         coeffB = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         radius = new javax.swing.JTextField();
+        sendButton = new javax.swing.JButton();
 
         setBackground(java.awt.Color.white);
 
-        jLabel1.setBackground(java.awt.Color.white);
-        jLabel1.setForeground(java.awt.Color.black);
-        jLabel1.setText("Oculus device connected");
+        labelConnection.setForeground(java.awt.Color.black);
+        labelConnection.setText("Connection to Oculus:");
+
+        javax.swing.GroupLayout panelImLayout = new javax.swing.GroupLayout(panelIm);
+        panelIm.setLayout(panelImLayout);
+        panelImLayout.setHorizontalGroup(
+            panelImLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 28, Short.MAX_VALUE)
+        );
+        panelImLayout.setVerticalGroup(
+            panelImLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 28, Short.MAX_VALUE)
+        );
 
         labelTrials.setForeground(java.awt.Color.black);
         labelTrials.setText("Trials per condition:");
 
         jLabel2.setForeground(java.awt.Color.black);
         jLabel2.setText("Number of globes:");
-
-        sendButton.setText("Send");
-        sendButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sendButtonActionPerformed(evt);
-            }
-        });
 
         jLabel3.setForeground(java.awt.Color.black);
         jLabel3.setText("Value of a:");
@@ -75,45 +81,55 @@ public class ConfigPanel extends javax.swing.JPanel {
         jLabel5.setForeground(java.awt.Color.black);
         jLabel5.setText("Radius:");
 
+        sendButton.setText("Send");
+        sendButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sendButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(labelConnection)
+                .addGap(6, 6, 6)
+                .addComponent(panelIm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 318, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(122, 122, 122)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(sendButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(sendButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel4)
-                                        .addComponent(jLabel5)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel3)))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(coeffA, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(coeffB, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(globes)
-                                        .addComponent(radius, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(labelTrials)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(trials, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(103, Short.MAX_VALUE))
+                                .addComponent(jLabel4)
+                                .addComponent(jLabel5)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel3)))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(coeffA, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(coeffB, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(globes)
+                                .addComponent(radius, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(labelTrials)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(trials, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(107, 107, 107))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(jLabel1)
                 .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(panelIm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(labelConnection, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelTrials)
                     .addComponent(trials, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -135,7 +151,7 @@ public class ConfigPanel extends javax.swing.JPanel {
                     .addComponent(radius, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addComponent(sendButton)
-                .addGap(42, 42, 42))
+                .addGap(34, 34, 34))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -147,9 +163,9 @@ public class ConfigPanel extends javax.swing.JPanel {
         m.setTrials(Integer.parseInt(this.trials.getText()));
         m.setNumberBalls(Integer.parseInt(this.globes.getText()));
         m.setRadius(Float.parseFloat(this.radius.getText()));
-        
-        String confirmation = this.client.sendData(m);
-        
+
+        String confirmation = this.frame.getClient().sendData(m);
+
         if(confirmation.equals("error")) {
             JOptionPane.showMessageDialog(this, "Something went wrong!", "Data send", JOptionPane.ERROR_MESSAGE);
         }
@@ -163,12 +179,13 @@ public class ConfigPanel extends javax.swing.JPanel {
     private javax.swing.JTextField coeffA;
     private javax.swing.JTextField coeffB;
     private javax.swing.JTextField globes;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel labelConnection;
     private javax.swing.JLabel labelTrials;
+    private javax.swing.JPanel panelIm;
     private javax.swing.JTextField radius;
     private javax.swing.JButton sendButton;
     private javax.swing.JTextField trials;

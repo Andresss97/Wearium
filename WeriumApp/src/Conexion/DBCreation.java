@@ -13,6 +13,8 @@ import java.util.logging.Logger;
 public abstract class DBCreation {
     public static void createDb(Conector con) {
         cTMeasurement(con);
+        cTPhysiotherapist(con);
+        cTPatient(con);
     }
     
     private static void cTMeasurement(Conector con) {
@@ -39,16 +41,41 @@ public abstract class DBCreation {
         }
     }
     
-    private static void CTPatient(Conector con) {
+    private static void cTPatient(Conector con) {
         Statement st = null;
         String in =  "";
         
         try {
             st = con.getCon().createStatement();
-            in = "CREATE TABLE PATIENT (ID ibteger PRIMARY KEY AUTOINCREMENT NOT NULL,"
+            in = "CREATE TABLE PATIENT (ID integer PRIMARY KEY AUTOINCREMENT NOT NULL,"
                     + " NAME varchar(20) NOT NULL, SURNAME varchar(20) NOT NULL,"
-                    + " DOB date NOT NULL, USERNAME varchar(25) NOT NULL,"
-                    + " PASSWORD text NOT NULL)";
+                    + " DOB date NOT NULL,"
+                    + " IDPHYSIOTHERAPIST int CONSTRAINT rPhysiotherapist references PHYSIOTHERAPIST ON UPDATE CASCADE ON DELETE SET NULL)";
+            
+            st.execute(in);
+        }
+        catch(Exception ex) {
+            ex.printStackTrace();
+        }
+        finally {
+            try {
+                st.close();
+            }catch(Exception ex){
+                
+            }
+            
+        }
+    }
+    
+    private static void cTPhysiotherapist(Conector con) {
+        Statement st = null;
+        String in =  "";
+        
+        try {
+            st = con.getCon().createStatement();
+            in = "CREATE TABLE PHYSIOTHERAPIST (ID integer PRIMARY KEY AUTOINCREMENT NOT NULL,"
+                    + " NAME varchar(20) NOT NULL, SURNAME varchar(20) NOT NULL,"
+                    + " USERNAME varchar(20) NOT NULL, PASSWORD varchar(20) NOT NULL)";
             
             st.execute(in);
         }

@@ -21,53 +21,55 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+              <Component id="labelConnection" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+              <Component id="panelIm" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="27" pref="318" max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="122" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" alignment="0" groupAlignment="0" attributes="0">
+                      <Component id="sendButton" alignment="1" min="-2" pref="80" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="sendButton" alignment="1" min="-2" pref="80" max="-2" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jLabel2" alignment="1" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="coeffA" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="coeffB" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="globes" max="32767" attributes="0"/>
-                                      <Component id="radius" alignment="0" pref="161" max="32767" attributes="0"/>
-                                  </Group>
+                              <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" alignment="0" groupAlignment="0" attributes="0">
+                                  <Component id="jLabel2" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="labelTrials" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="trials" min="-2" pref="161" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="coeffA" alignment="0" max="32767" attributes="0"/>
+                              <Component id="coeffB" alignment="0" max="32767" attributes="0"/>
+                              <Component id="globes" alignment="1" max="32767" attributes="0"/>
+                              <Component id="radius" alignment="0" min="-2" pref="161" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="labelTrials" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="trials" min="-2" pref="161" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace pref="103" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="107" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
-              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+          <Group type="102" attributes="0">
+              <EmptySpace min="28" pref="28" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="panelIm" max="32767" attributes="0"/>
+                  <Component id="labelConnection" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="labelTrials" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="trials" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -94,23 +96,35 @@
               </Group>
               <EmptySpace pref="52" max="32767" attributes="0"/>
               <Component id="sendButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="jLabel1">
+    <Component class="javax.swing.JLabel" name="labelConnection">
       <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
-        </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="0" green="0" id="black" palette="1" red="0" type="palette"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Oculus device connected"/>
+        <Property name="text" type="java.lang.String" value="Connection to Oculus:"/>
       </Properties>
     </Component>
+    <Container class="javax.swing.JPanel" name="panelIm">
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <EmptySpace min="0" pref="28" max="32767" attributes="0"/>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <EmptySpace min="0" pref="28" max="32767" attributes="0"/>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+    </Container>
     <Component class="javax.swing.JLabel" name="labelTrials">
       <Properties>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -121,6 +135,8 @@
     </Component>
     <Component class="javax.swing.JTextField" name="trials">
     </Component>
+    <Component class="javax.swing.JTextField" name="globes">
+    </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -128,16 +144,6 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Number of globes:"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="globes">
-    </Component>
-    <Component class="javax.swing.JButton" name="sendButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Send"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sendButtonActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
@@ -147,6 +153,8 @@
         <Property name="text" type="java.lang.String" value="Value of a:"/>
       </Properties>
     </Component>
+    <Component class="javax.swing.JTextField" name="coeffA">
+    </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -154,8 +162,6 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Value of b:"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="coeffA">
     </Component>
     <Component class="javax.swing.JTextField" name="coeffB">
     </Component>
@@ -168,6 +174,14 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="radius">
+    </Component>
+    <Component class="javax.swing.JButton" name="sendButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Send"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sendButtonActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

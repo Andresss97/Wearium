@@ -6,17 +6,19 @@ package Interfaz;
 
 import Conexion.Conector;
 import Conexion.DBCreation;
+import Conexion.QuerysSelect;
+import Pojos.Physiotherapist;
 import Transfer.Client;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.io.File;
-import java.io.IOException;
-import java.net.Socket;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.accessibility.AccessibleContext;
+
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JRootPane;
 
 /**
  *
@@ -26,6 +28,8 @@ public class Principal extends javax.swing.JFrame {
     
     private Client client;
     private Conector con;
+    private Physiotherapist p;
+    
     /**
      * Creates new form Principal
      */
@@ -42,6 +46,7 @@ public class Principal extends javax.swing.JFrame {
         }
         this.setLocationRelativeTo(null);
         this.setTitle("Werium Solutions - Rehab App");
+        this.p = new Physiotherapist();
     }
 
     /**
@@ -58,7 +63,7 @@ public class Principal extends javax.swing.JFrame {
         labelUser = new javax.swing.JLabel();
         username = new javax.swing.JTextField();
         labelPassword = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        password = new javax.swing.JPasswordField();
         buttonEnter = new javax.swing.JButton();
         buttonRegister = new javax.swing.JButton();
 
@@ -110,7 +115,7 @@ public class Principal extends javax.swing.JFrame {
                             .addComponent(labelUser))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(centralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPasswordField1)
+                            .addComponent(password)
                             .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(165, Short.MAX_VALUE))
         );
@@ -126,7 +131,7 @@ public class Principal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(centralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelPassword)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(buttonEnter)
                 .addContainerGap(137, Short.MAX_VALUE))
@@ -141,12 +146,41 @@ public class Principal extends javax.swing.JFrame {
 
     private void buttonRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRegisterActionPerformed
         // TODO add your handling code here:
-        
+        JDialog dialog = new JDialog(this, "Register", true);
+        JPanel panel = new RegisterPanel(this, this.con,dialog);
+        dialog.getContentPane().add(panel);
+        dialog.setSize(new Dimension(500,400));
+        dialog.setVisible(true);
+
+        dialog.pack();
     }//GEN-LAST:event_buttonRegisterActionPerformed
 
     private void buttonEnterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEnterActionPerformed
         // TODO add your handling code here:
+        String u = this.username.getText();
+        String p = this.password.getText();
         
+        QuerysSelect qs = new QuerysSelect(this.con);
+        
+        try {
+            this.p = qs.selectPhysiotherapist(u,p);
+            
+            if(this.p.getName() == null) {
+                JOptionPane.showMessageDialog(this, "Wrong credentials", "Credentials", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Wrong credentials", "Credentials", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        this.container.removeAll();
+        this.container.repaint();
+        
+        JPanel panel = new ConnectPanel(this);
+        this.container.add(panel, BorderLayout.CENTER);
+        panel.setVisible(true);
+        pack();
     }//GEN-LAST:event_buttonEnterActionPerformed
 
     /**
@@ -191,15 +225,32 @@ public class Principal extends javax.swing.JFrame {
     public void setContainer(JPanel container) {
         this.container = container;
     }   
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public Physiotherapist getP() {
+        return p;
+    }
+
+    public void setP(Physiotherapist p) {
+        this.p = p;
+    }
+    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonEnter;
     private javax.swing.JButton buttonRegister;
     private javax.swing.JPanel central;
     private javax.swing.JPanel container;
-    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JLabel labelPassword;
     private javax.swing.JLabel labelUser;
+    private javax.swing.JPasswordField password;
     private javax.swing.JTextField username;
     // End of variables declaration//GEN-END:variables
 }
