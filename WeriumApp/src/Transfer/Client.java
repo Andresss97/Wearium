@@ -54,9 +54,8 @@ public class Client {
             String trials = String.valueOf(m.getTrials());
             String radius = String.valueOf(m.getRadius());
             
-            this.oos.write(balls.getBytes());
-            this.oos.write(trials.getBytes());
-            this.oos.write(radius.getBytes());
+            this.oos.write(m.getNumberBalls());
+            //this.oos.write(trials.getBytes());
             
             value = this.listenForMessage();
         }
