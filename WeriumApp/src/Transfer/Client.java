@@ -5,9 +5,9 @@
 package Transfer;
 
 import Pojos.Measurement;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 
@@ -17,14 +17,14 @@ import java.net.Socket;
  */
 public class Client {
     private Socket socket;
-    private InputStream ois;
-    private OutputStream oos;
+    private DataInputStream ois;
+    private DataOutputStream oos;
     
     public Client(Socket socket) {
         this.socket = socket;
         try {
-            this.oos = this.socket.getOutputStream();
-            this.ois = this.socket.getInputStream();
+            this.oos = new DataOutputStream(this.socket.getOutputStream());
+            this.ois = new DataInputStream(this.socket.getInputStream());
         }
         catch(Exception ex) {
             ex.printStackTrace();
@@ -50,13 +50,7 @@ public class Client {
     public String sendData(Measurement m) {
         String value =  "";
         try {
-            String balls = String.valueOf(m.getNumberBalls());
-            String trials = String.valueOf(m.getTrials());
-            String radius = String.valueOf(m.getRadius());
-            
-            this.oos.write(m.getNumberBalls());
-            //this.oos.write(trials.getBytes());
-            
+            this.oos.writeInt(m.getNumberBalls());            
             value = this.listenForMessage();
         }
         catch(Exception ex) {
@@ -74,19 +68,19 @@ public class Client {
         this.socket = socket;
     }
 
-    public InputStream getOis() {
+    public DataInputStream getOis() {
         return ois;
     }
 
-    public void setOis(InputStream ois) {
+    public void setOis(DataInputStream ois) {
         this.ois = ois;
     }
 
-    public OutputStream getOos() {
+    public DataOutputStream getOos() {
         return oos;
     }
 
-    public void setOos(OutputStream oos) {
+    public void setOos(DataOutputStream oos) {
         this.oos = oos;
     }
     
