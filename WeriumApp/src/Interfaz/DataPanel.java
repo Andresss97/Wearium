@@ -116,7 +116,7 @@ public class DataPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Something went wrong!", "Data send", JOptionPane.ERROR_MESSAGE);
         }
         else{
-            JOptionPane.showMessageDialog(this, confirmation, "Data info", JOptionPane.INFORMATION_MESSAGE);
+            //JOptionPane.showMessageDialog(this, confirmation, "Data info", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_sendButtonActionPerformed
 
