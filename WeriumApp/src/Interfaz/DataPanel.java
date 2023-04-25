@@ -5,6 +5,7 @@
 package Interfaz;
 
 import Pojos.Measurement;
+import Visualization.Graph;
 import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -118,6 +119,9 @@ public class DataPanel extends javax.swing.JPanel {
         ArrayList<Float> i = m.convertStringIntoFloatArray(ids);
         System.out.println(t);
         System.out.println(i);
+        
+        Graph g = new Graph();
+        g.createGraph(t, i);
     }//GEN-LAST:event_sendButtonActionPerformed
 
 
