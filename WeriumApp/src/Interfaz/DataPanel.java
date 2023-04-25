@@ -112,12 +112,10 @@ public class DataPanel extends javax.swing.JPanel {
 
         String confirmation = this.frame.getClient().sendData(m);
 
-        if(confirmation.equals("error")) {
-            JOptionPane.showMessageDialog(this, "Something went wrong!", "Data send", JOptionPane.ERROR_MESSAGE);
-        }
-        else{
-            //JOptionPane.showMessageDialog(this, confirmation, "Data info", JOptionPane.INFORMATION_MESSAGE);
-        }
+        String answer = this.frame.getClient().listenForMessage();
+        String answer2 = this.frame.getClient().listenForMessage();
+        System.out.println(answer);
+        System.out.println(answer2);
     }//GEN-LAST:event_sendButtonActionPerformed
 
 

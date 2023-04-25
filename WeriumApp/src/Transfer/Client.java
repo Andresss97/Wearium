@@ -7,8 +7,6 @@ package Transfer;
 import Pojos.Measurement;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.Socket;
 
 /**
@@ -34,9 +32,9 @@ public class Client {
     public String listenForMessage() {
         while(this.socket.isConnected()) {
             try {
-                byte[] lenBytes = new byte[100];
-                Object ob = ois.read(lenBytes,0,100);
-                String val = new String(lenBytes,0,100);
+                byte[] lenBytes = new byte[100000];
+                Object ob = ois.read(lenBytes,0,100000);
+                String val = new String(lenBytes,0,100000);
                 
                 return val;
             }
@@ -51,7 +49,7 @@ public class Client {
         String value =  "";
         try {
             this.oos.writeInt(m.getNumberBalls());            
-            value = this.listenForMessage();
+            //value = this.listenForMessage();
         }
         catch(Exception ex) {
             return "error";
