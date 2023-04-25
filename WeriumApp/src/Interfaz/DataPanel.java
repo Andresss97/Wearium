@@ -111,9 +111,14 @@ public class DataPanel extends javax.swing.JPanel {
         m.setNumberBalls(Integer.parseInt(this.globes.getText()));
 
         String confirmation = this.frame.getClient().sendData(m);
-
-        String answer = this.frame.getClient().listenForMessage();
-        String answer2 = this.frame.getClient().listenForMessage();
+        
+        String sizeTimes = this.frame.getClient().listenForMessage();
+        String sizeIds = this.frame.getClient().listenForMessage();
+        int t = Integer.parseInt(sizeTimes);
+        int i = Integer.parseInt(sizeIds);
+        
+        String answer = this.frame.getClient().listenForMessage2(t);
+        String answer2 = this.frame.getClient().listenForMessage2(i);
         System.out.println(answer);
         System.out.println(answer2);
     }//GEN-LAST:event_sendButtonActionPerformed

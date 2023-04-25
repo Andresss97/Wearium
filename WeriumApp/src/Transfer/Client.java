@@ -45,6 +45,22 @@ public class Client {
         return "val";
     }
     
+        public String listenForMessage2(int size) {
+        while(this.socket.isConnected()) {
+            try {
+                byte[] lenBytes = new byte[size];
+                Object ob = ois.read(lenBytes,0,size);
+                String val = new String(lenBytes,0,size);
+                
+                return val;
+            }
+            catch(Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+        return "val";
+    }
+    
     public String sendData(Measurement m) {
         String value =  "";
         try {
