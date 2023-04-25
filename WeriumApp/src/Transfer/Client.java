@@ -32,9 +32,9 @@ public class Client {
     public String listenForMessage() {
         while(this.socket.isConnected()) {
             try {
-                byte[] lenBytes = new byte[100000];
-                Object ob = ois.read(lenBytes,0,100000);
-                String val = new String(lenBytes,0,100000);
+                byte[] lenBytes = new byte[100];
+                Object ob = ois.read(lenBytes,0,100);
+                String val = new String(lenBytes,0,100);
                 
                 return val;
             }
