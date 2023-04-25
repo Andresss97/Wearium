@@ -6,6 +6,7 @@ package Interfaz;
 
 import Pojos.Measurement;
 import java.awt.Color;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,7 +21,6 @@ public class DataPanel extends javax.swing.JPanel {
     
 
     private Principal frame;
-    
     public DataPanel(Principal frame) {
         initComponents();
         this.frame = frame;
@@ -112,15 +112,12 @@ public class DataPanel extends javax.swing.JPanel {
 
         String confirmation = this.frame.getClient().sendData(m);
         
-        String sizeTimes = this.frame.getClient().listenForMessage();
-        String sizeIds = this.frame.getClient().listenForMessage();
-        int t = Integer.parseInt(sizeTimes);
-        int i = Integer.parseInt(sizeIds);
-        
-        String answer = this.frame.getClient().listenForMessage2(t);
-        String answer2 = this.frame.getClient().listenForMessage2(i);
-        System.out.println(answer);
-        System.out.println(answer2);
+        String times = this.frame.getClient().listenForMessage();
+        String ids = this.frame.getClient().listenForMessage();
+        ArrayList<Float> t = m.convertStringIntoFloatArray(times);
+        ArrayList<Float> i = m.convertStringIntoFloatArray(ids);
+        System.out.println(t);
+        System.out.println(i);
     }//GEN-LAST:event_sendButtonActionPerformed
 
 

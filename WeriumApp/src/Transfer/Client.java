@@ -32,27 +32,11 @@ public class Client {
     public String listenForMessage() {
         while(this.socket.isConnected()) {
             try {
-                byte[] lenBytes = new byte[100];
-                Object ob = ois.read(lenBytes,0,100);
-                String val = new String(lenBytes,0,100);
+                byte[] lenBytes = new byte[250];
+                Object ob = ois.read(lenBytes,0,250);
+                String val = new String(lenBytes,0,250);
                 
-                return val;
-            }
-            catch(Exception ex) {
-                ex.printStackTrace();
-            }
-        }
-        return "val";
-    }
-    
-        public String listenForMessage2(int size) {
-        while(this.socket.isConnected()) {
-            try {
-                byte[] lenBytes = new byte[size];
-                Object ob = ois.read(lenBytes,0,size);
-                String val = new String(lenBytes,0,size);
-                
-                return val;
+                return val.trim();
             }
             catch(Exception ex) {
                 ex.printStackTrace();

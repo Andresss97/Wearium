@@ -4,6 +4,9 @@
  */
 package Pojos;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author andre
@@ -11,9 +14,7 @@ package Pojos;
 public class Measurement {
     private float coeff_A;
     private float coeff_B;
-    private float radius;
     private int numberBalls;
-    private int trials;
     
     public Measurement() {
         
@@ -35,29 +36,31 @@ public class Measurement {
         this.coeff_B = coeff_B;
     }
 
-    public float getRadius() {
-        return radius;
-    }
-
-    public void setRadius(float radius) {
-        this.radius = radius;
-    }
-
     public int getNumberBalls() {
         return numberBalls;
     }
 
     public void setNumberBalls(int numberBalls) {
         this.numberBalls = numberBalls;
-    }
-
-    public int getTrials() {
-        return trials;
-    }
-
-    public void setTrials(int trials) {
-        this.trials = trials;
-    }
+    }   
     
-    
+    public ArrayList<Float> convertStringIntoFloatArray(String value) {
+        ArrayList<Float> l = new ArrayList();
+        value = value.trim();
+        int i = 0;
+        do{
+            for(int j = i; j < value.length(); j++) {
+                char c = value.charAt(j);
+                if(c == ',') {
+                    String k = value.substring(i, j);
+                    float v = Float.parseFloat(k);
+                    l.add(v);
+                    i = j + 1;
+                    break;
+                }
+            }
+        }while(i<value.length());
+        
+        return l;
+    }
 }
