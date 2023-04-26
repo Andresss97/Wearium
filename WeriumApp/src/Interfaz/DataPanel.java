@@ -8,7 +8,6 @@ import Pojos.Measurement;
 import Visualization.Graph;
 import java.awt.Color;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -111,14 +110,19 @@ public class DataPanel extends javax.swing.JPanel {
         Measurement m = new Measurement();
         m.setNumberBalls(Integer.parseInt(this.globes.getText()));
 
-        String confirmation = this.frame.getClient().sendData(m);
+        this.frame.getClient().sendData(m);
         
         String times = this.frame.getClient().listenForMessage();
         String ids = this.frame.getClient().listenForMessage();
+        
         ArrayList<Float> t = m.convertStringIntoFloatArray(times);
         ArrayList<Float> i = m.convertStringIntoFloatArray(ids);
+        
         System.out.println(t);
         System.out.println(i);
+        
+        m.setTimes(times);
+        m.setIds(ids);
         
         Graph g = new Graph();
         g.createGraph(t, i);

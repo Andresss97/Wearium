@@ -178,7 +178,7 @@ public class Principal extends javax.swing.JFrame {
         this.container.removeAll();
         this.container.repaint();
         
-        JPanel panel = new ConnectPanel(this);
+        JPanel panel = new ConnectPanel(this, this.p);
         this.container.add(panel, BorderLayout.CENTER);
         panel.setVisible(true);
         pack();
@@ -243,7 +243,13 @@ public class Principal extends javax.swing.JFrame {
         this.p = p;
     }
     
+    public Conector getCon() {
+        return this.con;
+    }
     
+    public void setCon(Conector con) {
+        this.con = con;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonEnter;
     private javax.swing.JButton buttonRegister;

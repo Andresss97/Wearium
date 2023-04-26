@@ -25,7 +25,7 @@ public abstract class DBCreation {
             st = con.getCon().createStatement();
             in = "CREATE TABLE MEASUREMENT (ID integer PRIMARY KEY AUTOINCREMENT NOT NULL, "
                     + "COEF_A float NOT NULL, COEF_B float NOT NULL, "
-                    + "DISTANCE float NOT NULL, SIZE float NOT NULL, TIME float NOT NULL, "
+                    + "TIMES text NOT NULL, IDS text NOT NULL, "
                     + "IDPATIENT int CONSTRAINT rPatient references PATIENT ON UPDATE CASCADE ON DELETE SET NULL)";
             st.execute(in);
         }
@@ -49,7 +49,6 @@ public abstract class DBCreation {
             st = con.getCon().createStatement();
             in = "CREATE TABLE PATIENT (ID integer PRIMARY KEY AUTOINCREMENT NOT NULL,"
                     + " NAME varchar(20) NOT NULL, SURNAME varchar(20) NOT NULL,"
-                    + " DOB date NOT NULL,"
                     + " IDPHYSIOTHERAPIST int CONSTRAINT rPhysiotherapist references PHYSIOTHERAPIST ON UPDATE CASCADE ON DELETE SET NULL)";
             
             st.execute(in);

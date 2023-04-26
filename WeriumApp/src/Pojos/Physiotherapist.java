@@ -17,7 +17,8 @@ public class Physiotherapist{
     private String password;
     private String name;
     private String surname;
-    private List<Patient> patients;
+    private ArrayList<Patient> patients;
+    private int id;
     
     public Physiotherapist() {
         this.patients = new ArrayList();
@@ -55,11 +56,19 @@ public class Physiotherapist{
         this.surname = surname;
     }
 
-    public List<Patient> getPatients() {
+    public ArrayList<Patient> getPatients() {
         return patients;
     }
 
-    public void setPatients(List<Patient> patients) {
+    public void setPatients(ArrayList<Patient> patients) {
         this.patients = patients;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

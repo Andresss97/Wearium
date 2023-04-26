@@ -15,6 +15,8 @@ public class Measurement {
     private float coeff_A;
     private float coeff_B;
     private int numberBalls;
+    private String times;
+    private String ids;
     
     public Measurement() {
         
@@ -43,6 +45,24 @@ public class Measurement {
     public void setNumberBalls(int numberBalls) {
         this.numberBalls = numberBalls;
     }   
+
+    public String getTimes() {
+        return times;
+    }
+
+    public void setTimes(String times) {
+        this.times = times;
+    }
+
+    public String getIds() {
+        return ids;
+    }
+
+    public void setIds(String ids) {
+        this.ids = ids;
+    }
+    
+    
     
     public ArrayList<Float> convertStringIntoFloatArray(String value) {
         ArrayList<Float> l = new ArrayList();
@@ -63,4 +83,6 @@ public class Measurement {
         
         return l;
     }
+    
+    
 }

@@ -4,11 +4,14 @@
  */
 package Interfaz;
 
+import Pojos.Patient;
+import Pojos.Physiotherapist;
 import Transfer.Client;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.io.IOException;
 import java.net.Socket;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -24,11 +27,19 @@ public class ConnectPanel extends javax.swing.JPanel {
     
 
     private Principal frame;
+    private Physiotherapist p;
+    private Patient patient;
     
-    public ConnectPanel(Principal frame) {
+    private final DefaultListModel model;
+    
+    public ConnectPanel(Principal frame, Physiotherapist p) {
         initComponents();
         this.frame = frame;
+        this.p = p;
         this.panelIm.setBackground(Color.red);
+        this.model = new DefaultListModel();
+        this.listPatients.setModel(model);
+        this.updateList();
     }
 
     /**
@@ -44,7 +55,7 @@ public class ConnectPanel extends javax.swing.JPanel {
         ip = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        listPatients = new javax.swing.JList<>();
         labelPatients = new javax.swing.JLabel();
         labelConnection = new javax.swing.JLabel();
         panelIm = new javax.swing.JPanel();
@@ -62,12 +73,12 @@ public class ConnectPanel extends javax.swing.JPanel {
         jLabel1.setForeground(java.awt.Color.black);
         jLabel1.setText("IP:");
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+        listPatients.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listPatientsMouseClicked(evt);
+            }
         });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(listPatients);
 
         labelPatients.setBackground(java.awt.Color.white);
         labelPatients.setForeground(java.awt.Color.black);
@@ -103,28 +114,25 @@ public class ConnectPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(labelConnection)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane1)
-                                .addGap(6, 6, 6)))
+                            .addComponent(labelPatients, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(registerPatient, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(labelConnection, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(panelIm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 163, Short.MAX_VALUE)
-                                .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(ip, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(27, 27, 27))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(75, 75, 75)
-                                .addComponent(connectButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelPatients, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(registerPatient))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                                .addComponent(panelIm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel1))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(111, 111, 111)
+                                .addComponent(connectButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ip, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,25 +144,27 @@ public class ConnectPanel extends javax.swing.JPanel {
                         .addComponent(ip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel1)
                         .addComponent(labelConnection)))
-                .addGap(29, 29, 29)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addComponent(registerPatient)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(labelPatients)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(100, 100, 100)
-                        .addComponent(connectButton)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 19, Short.MAX_VALUE)
-                        .addComponent(registerPatient)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(labelPatients)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(58, 58, 58))))
+                        .addGap(58, 58, 58))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(connectButton)
+                        .addGap(160, 160, 160))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void connectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_connectButtonActionPerformed
         // TODO add your handling code here:
+        if(this.patient == null) {
+            return;
+        }
+        
         String ip = this.ip.getText();
         String welcomeMessage = "";
         Socket socket;
@@ -181,18 +191,44 @@ public class ConnectPanel extends javax.swing.JPanel {
 
     private void registerPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerPatientActionPerformed
         // TODO add your handling code here:
+        JPanel panel = new RegisterPatient(this.frame,this, this.p);
+        this.frame.getContainer().removeAll();
+        this.frame.getContainer().repaint();
         
+        this.frame.getContainer().add(panel, BorderLayout.CENTER);
+        panel.setVisible(true);
+        this.frame.pack();
     }//GEN-LAST:event_registerPatientActionPerformed
 
+    private void listPatientsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listPatientsMouseClicked
+        // TODO add your handling code here:
+        int index = this.listPatients.locationToIndex(evt.getPoint());
+        this.patient = (Patient) this.model.get(index);
+    }//GEN-LAST:event_listPatientsMouseClicked
 
+    public int getId() {
+        return this.p.getId();
+    }
+    
+    public void updateList() {
+        this.listPatients.removeAll();
+        this.model.clear();
+        
+        if(this.p.getPatients().isEmpty()) {
+            return;
+        }
+        
+        this.model.addAll(this.p.getPatients());
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton connectButton;
     private javax.swing.JTextField ip;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelConnection;
     private javax.swing.JLabel labelPatients;
+    private javax.swing.JList<String> listPatients;
     private javax.swing.JPanel panelIm;
     private javax.swing.JButton registerPatient;
     // End of variables declaration//GEN-END:variables

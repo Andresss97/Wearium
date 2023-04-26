@@ -136,14 +136,14 @@ public class RegisterPanel extends javax.swing.JPanel {
         
         QuerysInsert qi = new QuerysInsert(con);
         
-        qi.insertPatient(p);
+        qi.insertPhysiotherapist(p);
         
         JOptionPane.showMessageDialog(this, "Register done correctlty", "Information register", JOptionPane.INFORMATION_MESSAGE);
         d.dispose();
         
         this.principal.getContainer().removeAll();
         this.principal.getContainer().repaint();
-        JPanel panel = new ConnectPanel(principal);
+        JPanel panel = new ConnectPanel(principal, p);
         this.principal.getContainer().add(panel, BorderLayout.CENTER);
         panel.setVisible(true);
         this.principal.pack();

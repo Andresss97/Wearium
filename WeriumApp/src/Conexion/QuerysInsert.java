@@ -4,6 +4,7 @@
  */
 package Conexion;
 
+import Pojos.Patient;
 import Pojos.Physiotherapist;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -20,7 +21,7 @@ public class QuerysInsert {
         this.con = con;
     }
     
-    public void insertPatient(Physiotherapist p) {
+    public void insertPhysiotherapist(Physiotherapist p) {
         String query = "INSERT into Physiotherapist (name, surname, username, password) values (?,?,?,?)";
         try {
             PreparedStatement st = this.con.getCon().prepareStatement(query);
@@ -31,6 +32,21 @@ public class QuerysInsert {
             
             st.executeUpdate();
         } catch (SQLException ex) {
+            Logger.getLogger(QuerysInsert.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void insertPatient(Patient patient) {
+        String query =  "INSERT into Patient (name,surname,idphysiotherapist) values (?,?,?)";
+        
+        try {
+            PreparedStatement st = this.con.getCon().prepareStatement(query);
+            st.setString(1, patient.getName());
+            st.setString(2, patient.getSurname());
+            st.setInt(3, patient.getIdPhysiotherapist());
+            st.executeUpdate();
+        }
+        catch(Exception ex) {
             Logger.getLogger(QuerysInsert.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
