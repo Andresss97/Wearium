@@ -5,6 +5,8 @@
 package Interfaz;
 
 import Pojos.Measurement;
+import Pojos.Patient;
+import Pojos.Physiotherapist;
 import Visualization.Graph;
 import java.awt.Color;
 import java.util.ArrayList;
@@ -21,9 +23,16 @@ public class DataPanel extends javax.swing.JPanel {
     
 
     private Principal frame;
-    public DataPanel(Principal frame) {
+    private Patient patient;
+    private Physiotherapist p;
+    
+    public DataPanel(Principal frame, Patient patient, Physiotherapist p) {
         initComponents();
+        
         this.frame = frame;
+        this.patient = patient;
+        this.p = p;
+        
         this.panelIm.setBackground(Color.green);
     }
 

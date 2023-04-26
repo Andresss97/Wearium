@@ -183,7 +183,7 @@ public class ConnectPanel extends javax.swing.JPanel {
         this.frame.getContainer().removeAll();
         this.frame.getContainer().repaint();
 
-        JPanel panel = new DataPanel(frame);
+        JPanel panel = new DataPanel(frame, this.patient, this.p);
         this.frame.getContainer().add(panel,BorderLayout.CENTER);
         panel.setVisible(true);
         this.frame.pack();
