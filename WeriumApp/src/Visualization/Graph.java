@@ -23,7 +23,7 @@ public class Graph {
         this.dataset = new XYSeriesCollection();
     }
     
-    public void createGraph(ArrayList<Float> times, ArrayList<Float> ids) {
+    public void createGraph(ArrayList<Float> times, ArrayList<Float> ids, float b, float a, float r) {
         
         XYSeries series = new XYSeries("Fitts study");
         float [] t = this.convertListToArray(times);

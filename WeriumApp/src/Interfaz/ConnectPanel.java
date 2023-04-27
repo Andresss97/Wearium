@@ -7,6 +7,7 @@ package Interfaz;
 import Pojos.Patient;
 import Pojos.Physiotherapist;
 import Transfer.Client;
+import Visualization.Graph;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.io.IOException;
@@ -202,7 +203,7 @@ public class ConnectPanel extends javax.swing.JPanel {
     private void listPatientsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listPatientsMouseClicked
         // TODO add your handling code here:
         int index = this.listPatients.locationToIndex(evt.getPoint());
-        this.patient = (Patient) this.model.get(index);
+        this.patient = (Patient) this.model.get(index);        
     }//GEN-LAST:event_listPatientsMouseClicked
 
     public int getId() {

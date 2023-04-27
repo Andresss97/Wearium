@@ -11,8 +11,8 @@ import Pojos.Physiotherapist;
 import Visualization.Graph;
 import java.awt.Color;
 import java.util.ArrayList;
-import org.python.core.PyObject;
-import org.python.util.PythonInterpreter;
+import org.apache.commons.math4.legacy.stat.regression.SimpleRegression;
+
 
 /**
  *
@@ -140,12 +140,14 @@ public class DataPanel extends javax.swing.JPanel {
         m.setTimes(times);
         m.setIds(ids);
         
+        float data[] = this.obtainCoefficients(t,i);
+        
         this.patient.getMeasurements().add(m);
         qi.insertMeasurement(m, patient);
         
         this.updatePhyshiotherapistList();
         Graph g = new Graph();
-        g.createGraph(t, i);
+        g.createGraph(t, i, data[0], data[1], data[2]);
     }//GEN-LAST:event_sendButtonActionPerformed
 
     
@@ -157,10 +159,32 @@ public class DataPanel extends javax.swing.JPanel {
         }
     }
     
-    private void obtainCoefficients(ArrayList<Float> times, ArrayList<Float> ids) {
-        PythonInterpreter pythonInterpreter = new PythonInterpreter();
-        pythonInterpreter.execfile(".\\src\\Regression\\Regression.py");
+    private float[] obtainCoefficients(ArrayList<Float> times, ArrayList<Float> ids) {
+        double data[][] = new double[18][18];
+        
+        for(int i = 0; i < 18; i++) {
+            for(int j = 0; j < 2; j++) {
+                if(i%2 == 0) {
+                    data[i][j] = ids.get(i);
+                }
+                else {
+                    data[i][j] = times.get(i);
+                }
+            }
+        }
+        
+        SimpleRegression si = new SimpleRegression(true);
+        si.addData(data);
+        
+        float coefficients[] = new float[3];
+        
+        coefficients[0] =(float) si.getSlope();
+        coefficients[1] = (float) si.getIntercept();
+        coefficients[2] = (float) si.getR();
+        
+        return coefficients;
     }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField globes;
     private javax.swing.JLabel jLabel2;
