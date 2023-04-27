@@ -35,7 +35,7 @@ public class Graph {
         
         dataset.addSeries(series);
         
-        JFreeChart scatterPlot = ChartFactory.createScatterPlot("Fitts Law", "IDs (bits)", "MT (ms)", dataset);
+        JFreeChart scatterPlot = ChartFactory.createScatterPlot("y = "+a+" + " + b +"*x  " + "r = " +r, "IDs (bits)", "MT (ms)", dataset);
         
         ChartFrame chart = new ChartFrame("Results", scatterPlot);
         chart.setSize(new Dimension(530,370));

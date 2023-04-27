@@ -164,7 +164,7 @@ public class DataPanel extends javax.swing.JPanel {
         
         for(int i = 0; i < 18; i++) {
             for(int j = 0; j < 2; j++) {
-                if(i%2 == 0) {
+                if(j%2 == 0) {
                     data[i][j] = ids.get(i);
                 }
                 else {
@@ -177,6 +177,10 @@ public class DataPanel extends javax.swing.JPanel {
         si.addData(data);
         
         float coefficients[] = new float[3];
+        
+        System.out.println("b: " + si.getSlope());
+        System.out.println("a: " + si.getIntercept());
+        System.out.println("r: " + si.getR());
         
         coefficients[0] =(float) si.getSlope();
         coefficients[1] = (float) si.getIntercept();
