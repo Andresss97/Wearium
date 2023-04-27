@@ -4,6 +4,7 @@
  */
 package Interfaz;
 
+import Conexion.QuerysInsert;
 import Pojos.Measurement;
 import Pojos.Patient;
 import Pojos.Physiotherapist;
@@ -116,6 +117,8 @@ public class DataPanel extends javax.swing.JPanel {
 
     private void sendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendButtonActionPerformed
         // TODO add your handling code here:
+        QuerysInsert qi = new QuerysInsert(frame.getCon());
+        
         Measurement m = new Measurement();
         m.setNumberBalls(Integer.parseInt(this.globes.getText()));
 
@@ -133,11 +136,23 @@ public class DataPanel extends javax.swing.JPanel {
         m.setTimes(times);
         m.setIds(ids);
         
+        this.patient.getMeasurements().add(m);
+        qi.insertMeasurement(m, patient);
+        
+        this.updatePhyshiotherapistList();
         Graph g = new Graph();
         g.createGraph(t, i);
     }//GEN-LAST:event_sendButtonActionPerformed
 
-
+    
+    public void updatePhyshiotherapistList() {
+        for(int i = 0; i < this.p.getPatients().size();i++) {
+            if(this.p.getPatients().get(i).getId() == this.patient.getId()) {
+                this.p.getPatients().set(i, this.patient);
+            }
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField globes;
     private javax.swing.JLabel jLabel2;

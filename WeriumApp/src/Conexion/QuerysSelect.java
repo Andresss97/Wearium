@@ -4,6 +4,7 @@
  */
 package Conexion;
 
+import Pojos.Measurement;
 import Pojos.Patient;
 import Pojos.Physiotherapist;
 import java.sql.*;
@@ -56,6 +57,7 @@ public class QuerysSelect {
             patient.setName(set.getString("name"));
             patient.setSurname(set.getString("surname"));
             patient.setIdPhysiotherapist(set.getInt("idphysiotherapist"));
+            patient.setId(set.getInt("id"));
             
             patients.add(patient);
         }
@@ -64,5 +66,26 @@ public class QuerysSelect {
         st.close();
         
         return patients;
+    }
+    
+    public ArrayList<Measurement> selectMeasurementsPatients(int patientId) throws SQLException{
+        ArrayList<Measurement> measurements = new ArrayList();
+        String query = "SELECT * from MEASUREMENT where idpatient = '" + patientId +"'";
+        
+        PreparedStatement st = this.con.getCon().prepareStatement(query);
+        
+        ResultSet set = st.executeQuery();
+        
+        while(set.next()) {
+            Measurement m = new Measurement();
+            m.setCoeff_A(set.getFloat("coef_a"));
+            m.setCoeff_B(set.getFloat("coef_b"));
+            m.setTimes(set.getString("times"));
+            m.setIds(set.getString("ids"));
+            
+            measurements.add(m);
+        }
+        
+        return measurements;
     }
 }

@@ -60,9 +60,7 @@ public class Measurement {
 
     public void setIds(String ids) {
         this.ids = ids;
-    }
-    
-    
+    }    
     
     public ArrayList<Float> convertStringIntoFloatArray(String value) {
         ArrayList<Float> l = new ArrayList();

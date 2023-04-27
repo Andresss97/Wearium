@@ -4,6 +4,7 @@
  */
 package Conexion;
 
+import Pojos.Measurement;
 import Pojos.Patient;
 import Pojos.Physiotherapist;
 import java.sql.SQLException;
@@ -48,6 +49,23 @@ public class QuerysInsert {
         }
         catch(Exception ex) {
             Logger.getLogger(QuerysInsert.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void insertMeasurement(Measurement measurement, Patient patient) {
+        String query = "INSERT into Measurement (coef_a,coef_b, times, ids, idpatient) values (?,?,?,?,?)";
+        try {
+            PreparedStatement st = this.con.getCon().prepareStatement(query);
+            st.setFloat(1, measurement.getCoeff_A());
+            st.setFloat(2, measurement.getCoeff_B());
+            st.setString(3,measurement.getTimes());
+            st.setString(4, measurement.getIds());
+            st.setInt(5, patient.getId());
+            
+            st.executeUpdate();
+        }
+        catch(Exception ex) {
+            
         }
     }
 }

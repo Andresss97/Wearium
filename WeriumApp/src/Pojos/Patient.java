@@ -5,19 +5,22 @@
 package Pojos;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 /**
  *
  * @author andre
  */
 public class Patient {
+    private int id;
     private String name;
     private String surname;
     private Date dob;
     private int idPhysiotherapist;
+    private ArrayList<Measurement> measurements;
     
     public Patient() {
-        
+        this.measurements = new ArrayList();
     }
 
     public String getName() {
@@ -50,6 +53,22 @@ public class Patient {
 
     public void setIdPhysiotherapist(int idPhysiotherapist) {
         this.idPhysiotherapist = idPhysiotherapist;
+    }
+
+    public ArrayList<Measurement> getMeasurements() {
+        return measurements;
+    }
+
+    public void setMeasurements(ArrayList<Measurement> measurements) {
+        this.measurements = measurements;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
     
     @Override
