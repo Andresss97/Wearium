@@ -59,6 +59,8 @@ public class QuerysSelect {
             patient.setIdPhysiotherapist(set.getInt("idphysiotherapist"));
             patient.setId(set.getInt("id"));
             
+            ArrayList<Measurement> measurements = this.selectMeasurementsPatients(patient.getId());
+            patient.setMeasurements(measurements);
             patients.add(patient);
         }
         

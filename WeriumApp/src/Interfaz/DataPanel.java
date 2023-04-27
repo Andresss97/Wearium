@@ -11,6 +11,8 @@ import Pojos.Physiotherapist;
 import Visualization.Graph;
 import java.awt.Color;
 import java.util.ArrayList;
+import org.python.core.PyObject;
+import org.python.util.PythonInterpreter;
 
 /**
  *
@@ -130,6 +132,8 @@ public class DataPanel extends javax.swing.JPanel {
         ArrayList<Float> t = m.convertStringIntoFloatArray(times);
         ArrayList<Float> i = m.convertStringIntoFloatArray(ids);
         
+        this.obtainCoefficients(t, i);
+        
         System.out.println(t);
         System.out.println(i);
         
@@ -153,6 +157,10 @@ public class DataPanel extends javax.swing.JPanel {
         }
     }
     
+    private void obtainCoefficients(ArrayList<Float> times, ArrayList<Float> ids) {
+        PythonInterpreter pythonInterpreter = new PythonInterpreter();
+        pythonInterpreter.execfile(".\\src\\Regression\\Regression.py");
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField globes;
     private javax.swing.JLabel jLabel2;
