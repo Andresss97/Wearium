@@ -178,10 +178,6 @@ public class DataPanel extends javax.swing.JPanel {
         
         float coefficients[] = new float[3];
         
-        System.out.println("b: " + si.getSlope());
-        System.out.println("a: " + si.getIntercept());
-        System.out.println("r: " + si.getR());
-        
         coefficients[0] =(float) si.getSlope();
         coefficients[1] = (float) si.getIntercept();
         coefficients[2] = (float) si.getR();

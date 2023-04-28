@@ -27,7 +27,7 @@ public class Graph {
     public void createGraph(ArrayList<Float> times, ArrayList<Float> ids, float b, float a, float r) {
         
         XYSeries series = new XYSeries("Fitts study");
-        XYSeries line = new XYSeries("Equation line");
+        XYSeries line = new XYSeries("y = " + a + " + " + b + "*x" );
         
         float [] t = this.convertListToArray(times);
         float [] is = this.convertListToArray(ids);
@@ -52,10 +52,10 @@ public class Graph {
         sh.setSeriesShapesVisible(0, true);
         sh.setSeriesShapesVisible(1, false);
         
-        JFreeChart plot = ChartFactory.createXYLineChart("y = "+Math.round(a)+" + " + Math.round(b) +"*x  " + "r = " +r + "\n TP = " + Math.round((1/b)*1000) + " bits/s", "IDs (bits)", "Time (ms)", dataset);
+        JFreeChart plot = ChartFactory.createXYLineChart("r = " +r + "\n TP = " + Math.round((1/b)*1000) + " bits/s", "IDs (bits)", "Time (ms)", dataset);
         
         plot.getXYPlot().setRenderer(sh);
-        
+
         ChartFrame chart = new ChartFrame("Results", plot);
         chart.setSize(new Dimension(530,370));
         centerFrameOnScreen(chart);
