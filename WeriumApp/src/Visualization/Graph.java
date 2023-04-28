@@ -52,7 +52,7 @@ public class Graph {
         sh.setSeriesShapesVisible(0, true);
         sh.setSeriesShapesVisible(1, false);
         
-        JFreeChart plot = ChartFactory.createXYLineChart("y = "+a+" + " + b +"*x  " + "r = " +r + " TP = " + (1/b)*1000, "IDs (bits)", "Time (ms)", dataset);
+        JFreeChart plot = ChartFactory.createXYLineChart("y = "+Math.round(a)+" + " + Math.round(b) +"*x  " + "r = " +r + "\n TP = " + Math.round((1/b)*1000) + " bits/s", "IDs (bits)", "Time (ms)", dataset);
         
         plot.getXYPlot().setRenderer(sh);
         
