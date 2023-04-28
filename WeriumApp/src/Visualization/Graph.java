@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import static org.jfree.ui.RefineryUtilities.centerFrameOnScreen;
@@ -26,6 +27,8 @@ public class Graph {
     public void createGraph(ArrayList<Float> times, ArrayList<Float> ids, float b, float a, float r) {
         
         XYSeries series = new XYSeries("Fitts study");
+        XYSeries line = new XYSeries("Equation line");
+        
         float [] t = this.convertListToArray(times);
         float [] is = this.convertListToArray(ids);
         
@@ -33,11 +36,27 @@ public class Graph {
             series.add(is[i],t[i]);
         }
         
+        for(int i = 0 ; i < times.size(); i++) {
+            double idValue = a+b*i;
+            
+            line.add(i,idValue);
+        }
         dataset.addSeries(series);
+        dataset.addSeries(line);
         
-        JFreeChart scatterPlot = ChartFactory.createScatterPlot("y = "+a+" + " + b +"*x  " + "r = " +r, "IDs (bits)", "MT (ms)", dataset);
+        XYLineAndShapeRenderer sh = new XYLineAndShapeRenderer();
         
-        ChartFrame chart = new ChartFrame("Results", scatterPlot);
+        sh.setSeriesLinesVisible(0, false);
+        sh.setSeriesLinesVisible(1, true);
+        
+        sh.setSeriesShapesVisible(0, true);
+        sh.setSeriesShapesVisible(1, false);
+        
+        JFreeChart plot = ChartFactory.createXYLineChart("y = "+a+" + " + b +"*x  " + "r = " +r + " TP = " + (1/b)*1000, "IDs (bits)", "Time (ms)", dataset);
+        
+        plot.getXYPlot().setRenderer(sh);
+        
+        ChartFrame chart = new ChartFrame("Results", plot);
         chart.setSize(new Dimension(530,370));
         centerFrameOnScreen(chart);
         chart.setVisible(true);
