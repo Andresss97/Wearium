@@ -132,15 +132,13 @@ public class DataPanel extends javax.swing.JPanel {
         ArrayList<Float> t = m.convertStringIntoFloatArray(times);
         ArrayList<Float> i = m.convertStringIntoFloatArray(ids);
         
-        this.obtainCoefficients(t, i);
-        
         System.out.println(t);
         System.out.println(i);
         
         m.setTimes(times);
         m.setIds(ids);
         
-        float data[] = this.obtainCoefficients(t,i);
+        float data[] = m.obtainCoefficients(t, i);
         
         this.patient.getMeasurements().add(m);
         qi.insertMeasurement(m, patient);
@@ -157,32 +155,6 @@ public class DataPanel extends javax.swing.JPanel {
                 this.p.getPatients().set(i, this.patient);
             }
         }
-    }
-    
-    private float[] obtainCoefficients(ArrayList<Float> times, ArrayList<Float> ids) {
-        double data[][] = new double[18][18];
-        
-        for(int i = 0; i < 18; i++) {
-            for(int j = 0; j < 2; j++) {
-                if(j%2 == 0) {
-                    data[i][j] = ids.get(i);
-                }
-                else {
-                    data[i][j] = times.get(i);
-                }
-            }
-        }
-        
-        SimpleRegression si = new SimpleRegression(true);
-        si.addData(data);
-        
-        float coefficients[] = new float[3];
-        
-        coefficients[0] =(float) si.getSlope();
-        coefficients[1] = (float) si.getIntercept();
-        coefficients[2] = (float) si.getR();
-        
-        return coefficients;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

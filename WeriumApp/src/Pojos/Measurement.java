@@ -6,6 +6,7 @@ package Pojos;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.commons.math4.legacy.stat.regression.SimpleRegression;
 
 /**
  *
@@ -82,5 +83,32 @@ public class Measurement {
         return l;
     }
     
-    
+    public float[] obtainCoefficients(ArrayList<Float> times, ArrayList<Float> ids) {
+        double data[][] = new double[18][18];
+        
+        for(int i = 0; i < 18; i++) {
+            for(int j = 0; j < 2; j++) {
+                if(j%2 == 0) {
+                    data[i][j] = ids.get(i);
+                }
+                else {
+                    data[i][j] = times.get(i);
+                }
+            }
+        }
+        
+        SimpleRegression si = new SimpleRegression(true);
+        si.addData(data);
+        
+        float coefficients[] = new float[3];
+        
+        this.coeff_A = (float) si.getIntercept();
+        this.coeff_B = (float) si.getSlope();
+        
+        coefficients[0] =(float) si.getSlope();
+        coefficients[1] = (float) si.getIntercept();
+        coefficients[2] = (float) si.getR();
+        
+        return coefficients;
+    }
 }

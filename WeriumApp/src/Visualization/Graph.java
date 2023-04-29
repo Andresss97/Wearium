@@ -19,7 +19,9 @@ import static org.jfree.ui.RefineryUtilities.centerFrameOnScreen;
  * @author andre
  */
 public class Graph {
+    
     private XYSeriesCollection dataset;
+    
     public Graph() {
         this.dataset = new XYSeriesCollection();
     }
@@ -36,11 +38,12 @@ public class Graph {
             series.add(is[i],t[i]);
         }
         
-        for(int i = 0 ; i < times.size(); i++) {
+        for(int i = 0 ; i < 10; i++) {
             double idValue = a+b*i;
             
             line.add(i,idValue);
         }
+        
         dataset.addSeries(series);
         dataset.addSeries(line);
         
@@ -51,8 +54,8 @@ public class Graph {
         
         sh.setSeriesShapesVisible(0, true);
         sh.setSeriesShapesVisible(1, false);
-        
-        JFreeChart plot = ChartFactory.createXYLineChart("r = " +r + "\n TP = " + Math.round((1/b)*1000) + " bits/s", "IDs (bits)", "Time (ms)", dataset);
+
+        JFreeChart plot = ChartFactory.createXYLineChart("r = " +r + "\n TP = " + (1/b)*1000 + " bits/s", "IDs (bits)", "Time (ms)", dataset);
         
         plot.getXYPlot().setRenderer(sh);
 
