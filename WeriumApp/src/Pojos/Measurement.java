@@ -66,19 +66,37 @@ public class Measurement {
     public ArrayList<Float> convertStringIntoFloatArray(String value) {
         ArrayList<Float> l = new ArrayList();
         value = value.trim();
+        
+        char[] x = value.toCharArray();
+        
+        int countComas = 0;
+        
+        for(int c = 0; c < value.length(); c++) {
+            if(x[c] == ',' && countComas%2 == 0) {
+                x[c] = '.';
+                countComas++;
+            }
+            else if(x[c] == ',' && countComas%2 != 0){
+                countComas++;
+            }
+        }
+        
+        String f = String.valueOf(x);
+        
         int i = 0;
         do{
-            for(int j = i; j < value.length(); j++) {
-                char c = value.charAt(j);
+            for(int j = i; j < f.length(); j++) {
+                char c = f.charAt(j);
                 if(c == ',') {
-                    String k = value.substring(i, j);
+                    String k = f.substring(i, j);
                     float v = Float.parseFloat(k);
                     l.add(v);
                     i = j + 1;
                     break;
                 }
             }
-        }while(i<value.length());
+        }while(i<f.length());
+        
         
         return l;
     }
