@@ -9,8 +9,14 @@ import Pojos.Measurement;
 import Pojos.Patient;
 import Pojos.Physiotherapist;
 import Visualization.Graph;
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import org.apache.commons.math4.legacy.stat.regression.SimpleRegression;
 
 
@@ -119,6 +125,10 @@ public class DataPanel extends javax.swing.JPanel {
 
     private void sendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendButtonActionPerformed
         // TODO add your handling code here:
+        if(this.checkInteger()== false){
+            JOptionPane.showMessageDialog(this, "You must introduce an integer number", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         QuerysInsert qi = new QuerysInsert(frame.getCon());
         
         Measurement m = new Measurement();
@@ -128,6 +138,12 @@ public class DataPanel extends javax.swing.JPanel {
         
         String times = this.frame.getClient().listenForMessage();
         String ids = this.frame.getClient().listenForMessage();
+        
+        try {
+            this.frame.getClient().disconnect();
+        } catch (IOException ex) {
+            Logger.getLogger(DataPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         ArrayList<Float> t = m.convertStringIntoFloatArray(times);
         ArrayList<Float> i = m.convertStringIntoFloatArray(ids);
@@ -146,6 +162,14 @@ public class DataPanel extends javax.swing.JPanel {
         this.updatePhyshiotherapistList();
         Graph g = new Graph();
         g.createGraph(t, i, data[0], data[1], data[2]);
+        
+        JPanel panel = new ConnectPanel(frame, p);
+        
+        this.frame.getContainer().removeAll();
+        this.frame.repaint();
+        this.frame.getContainer().add(panel, BorderLayout.CENTER);
+        panel.setVisible(true);
+        this.frame.pack();
     }//GEN-LAST:event_sendButtonActionPerformed
 
     
@@ -155,6 +179,16 @@ public class DataPanel extends javax.swing.JPanel {
                 this.p.getPatients().set(i, this.patient);
             }
         }
+    }
+    
+    public boolean checkInteger() {
+        try {
+            int i = Integer.parseInt(this.globes.getText());
+        }
+        catch(NumberFormatException ex) {
+            return false;
+        }
+        return true;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

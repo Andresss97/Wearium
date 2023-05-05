@@ -6,8 +6,12 @@ package Interfaz;
 
 import Conexion.Conector;
 import Conexion.QuerysInsert;
+import Conexion.QuerysSelect;
 import Pojos.Physiotherapist;
 import java.awt.BorderLayout;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -135,9 +139,15 @@ public class RegisterPanel extends javax.swing.JPanel {
         p.setPassword(this.password.getText());
         
         QuerysInsert qi = new QuerysInsert(con);
+        QuerysSelect qs = new QuerysSelect(con);
         
-        qi.insertPhysiotherapist(p);
         
+        try {
+            qi.insertPhysiotherapist(p);
+            p.setId(qs.selectIdPhysiotherapist(p));
+        } catch (SQLException ex) {
+            Logger.getLogger(RegisterPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
         JOptionPane.showMessageDialog(this, "Register done correctlty", "Information register", JOptionPane.INFORMATION_MESSAGE);
         d.dispose();
         

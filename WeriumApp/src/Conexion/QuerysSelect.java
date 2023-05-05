@@ -84,10 +84,44 @@ public class QuerysSelect {
             m.setCoeff_B(set.getFloat("coef_b"));
             m.setTimes(set.getString("times"));
             m.setIds(set.getString("ids"));
+            m.setNumberBalls(set.getInt("Nballs"));
+            m.setR(set.getFloat("r"));
             
             measurements.add(m);
         }
         
         return measurements;
+    }
+    
+    public int selectIdPatient(Patient patient) throws SQLException {
+        String query = "SELECT id from Patient where name = '" + patient.getName() + "' and surname = '" + patient.getSurname() + "'";
+        
+        PreparedStatement st = this.con.getCon().prepareStatement(query);
+        
+        ResultSet set = st.executeQuery();
+        
+        int id = 0;
+        
+        while(set.next()) {
+            id =set.getInt("id");
+        }
+        
+        return id;
+    }
+    
+    public int selectIdPhysiotherapist(Physiotherapist ph) throws SQLException {
+        String query = "SELECT id from Physiotherapist where username = '" + ph.getUsername() + "' and password = '" + ph.getPassword() + "'";
+        
+        PreparedStatement st = this.con.getCon().prepareStatement(query);
+        
+        ResultSet set = st.executeQuery();
+        
+        int id = 0;
+        
+        while(set.next()) {
+            id =set.getInt("id");
+        }
+        
+        return id;
     }
 }

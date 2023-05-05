@@ -53,14 +53,16 @@ public class QuerysInsert {
     }
     
     public void insertMeasurement(Measurement measurement, Patient patient) {
-        String query = "INSERT into Measurement (coef_a,coef_b, times, ids, idpatient) values (?,?,?,?,?)";
+        String query = "INSERT into Measurement (coef_a, coef_b, times, ids, r, Nballs, idpatient) values (?,?,?,?,?,?,?)";
         try {
             PreparedStatement st = this.con.getCon().prepareStatement(query);
             st.setFloat(1, measurement.getCoeff_A());
             st.setFloat(2, measurement.getCoeff_B());
             st.setString(3,measurement.getTimes());
             st.setString(4, measurement.getIds());
-            st.setInt(5, patient.getId());
+            st.setFloat(5, measurement.getR());
+            st.setInt(6, measurement.getNumberBalls());
+            st.setInt(7, patient.getId());
             
             st.executeUpdate();
         }

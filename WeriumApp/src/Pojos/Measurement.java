@@ -18,6 +18,7 @@ public class Measurement {
     private int numberBalls;
     private String times;
     private String ids;
+    private float r;
     
     public Measurement() {
         
@@ -62,6 +63,14 @@ public class Measurement {
     public void setIds(String ids) {
         this.ids = ids;
     }    
+
+    public float getR() {
+        return r;
+    }
+
+    public void setR(float r) {
+        this.r = r;
+    }
     
     public ArrayList<Float> convertStringIntoFloatArray(String value) {
         ArrayList<Float> l = new ArrayList();
@@ -122,6 +131,7 @@ public class Measurement {
         
         this.coeff_A = (float) si.getIntercept();
         this.coeff_B = (float) si.getSlope();
+        this.r = (float) si.getR();
         
         coefficients[0] =(float) si.getSlope();
         coefficients[1] = (float) si.getIntercept();

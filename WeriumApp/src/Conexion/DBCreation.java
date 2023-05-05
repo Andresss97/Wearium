@@ -25,7 +25,7 @@ public abstract class DBCreation {
             st = con.getCon().createStatement();
             in = "CREATE TABLE MEASUREMENT (ID integer PRIMARY KEY AUTOINCREMENT NOT NULL, "
                     + "COEF_A float NOT NULL, COEF_B float NOT NULL, "
-                    + "TIMES text NOT NULL, IDS text NOT NULL, "
+                    + "TIMES text NOT NULL, IDS text NOT NULL, R float NOT NULL, Nballs int NOT NULL, "
                     + "IDPATIENT int CONSTRAINT rPatient references PATIENT ON UPDATE CASCADE ON DELETE SET NULL)";
             st.execute(in);
         }

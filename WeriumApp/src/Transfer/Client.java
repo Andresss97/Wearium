@@ -7,6 +7,7 @@ package Transfer;
 import Pojos.Measurement;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.net.Socket;
 
 /**
@@ -82,5 +83,7 @@ public class Client {
         this.oos = oos;
     }
     
-    
+    public void disconnect() throws IOException{
+        this.socket.close();
+    }
 }

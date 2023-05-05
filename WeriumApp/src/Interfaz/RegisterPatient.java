@@ -5,6 +5,7 @@
 package Interfaz;
 
 import Conexion.QuerysInsert;
+import Conexion.QuerysSelect;
 import Pojos.Patient;
 import Pojos.Physiotherapist;
 import java.awt.BorderLayout;
@@ -100,6 +101,7 @@ public class RegisterPatient extends javax.swing.JPanel {
         // TODO add your handling code here:
         Patient patient = new Patient();
         QuerysInsert qi = new QuerysInsert(p.getCon());
+        QuerysSelect qs = new QuerysSelect(p.getCon());
         
         patient.setName(this.name.getText());
         patient.setSurname(this.surname.getText());
@@ -107,6 +109,7 @@ public class RegisterPatient extends javax.swing.JPanel {
         
         try {
             qi.insertPatient(patient);
+            patient.setId(qs.selectIdPatient(patient));
         }
         catch(Exception ex) {
             
